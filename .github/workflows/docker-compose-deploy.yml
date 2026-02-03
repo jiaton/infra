@@ -1,0 +1,24 @@
+name: Docker Compose Deploy
+
+# Reusable workflow for deploying Docker Compose projects
+# Same process for every project - no customization
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: self-hosted
+    
+    # Prevent concurrent deployments
+    concurrency:
+      group: deploy-${{ github.repository }}
+      cancel-in-progress: false
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Build and deploy
+        run: |
+          docker compose up -d --build

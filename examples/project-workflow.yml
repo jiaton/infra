@@ -1,0 +1,13 @@
+# Example project workflow
+# Save this as .github/workflows/deploy.yml in your project repository
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: your-username/infra/.github/workflows/docker-compose-deploy.yml@main
